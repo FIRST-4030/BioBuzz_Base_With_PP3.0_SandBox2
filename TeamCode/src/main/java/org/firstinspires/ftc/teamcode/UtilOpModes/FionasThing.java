@@ -14,32 +14,36 @@ import com.pedropathing.ivy.Command;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 @Autonomous
-public class FionasAuto extends OpMode
+public class FionasThing extends OpMode
 {
     private Follower follower; // Add this
-    private final PoseFactory p = PoseFactory.degrees(); // add this
+    private final PoseFactory poseFactory = PoseFactory.degrees(); // add this
     // our poses
     /*p.of(x, y, heading);
 So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 degrees. */
-    private final Pose startPose = p.of(24, 24, 0);
-    private final Pose scorePose = p.of(48, 48, 90);
-    private final Pose parkPose = p.of(72, 48, 90);
-    // other poses...
+    private final Pose start = poseFactory.of(24, 24, 0);
+    private final Pose path1Start = poseFactory.of(40, 25, 0);
+    private final Pose path1 = poseFactory.of(30, 35, 0);
+    private final Pose point2 = poseFactory.of(25, 20, 0);
+    private final Pose point3 = poseFactory.of(24, 24, 0);
 
 
-    private final Pose controlPose = p.of(36, 60, 45);
-
-    private Path startToScore() {
-        return line(startPose, scorePose).linear(startPose, scorePose);
+    public Path path1() {
+        return line(path1Start, path1).linear(path1Start, path1);
     }
-    private Path park(){
-        return line(scorePose, parkPose).linear(scorePose, parkPose);
+
+    public Path path2() {
+        return line(path1, point2).linear(path1, point2);
+    }
+
+    public Path path3() {
+        return line(point2, point3).linear(point2, point3);
     }
     private Command autoRoutine() {
         return sequential(
-                follow(follower, startToScore()),
-                // Add mechanism commands here.
-                follow(follower, park())
+                follow(follower, path1()),
+                follow(follower, path2()),
+                follow(follower, path3())
 
         );
     }
@@ -49,7 +53,7 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
     {
         Scheduler.reset();
         follower = Constants.create(hardwareMap);
-        follower.setPose(startPose);
+        follower.setPose(start);
         follower.update();
     }
     @Override
