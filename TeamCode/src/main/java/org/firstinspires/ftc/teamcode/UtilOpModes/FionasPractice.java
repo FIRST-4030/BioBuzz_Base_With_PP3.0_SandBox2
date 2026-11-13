@@ -3,6 +3,8 @@
 package org.firstinspires.ftc.teamcode.UtilOpModes;
 
 
+import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -50,6 +52,7 @@ public class FionasPractice extends OpMode
     }
 
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void loop() {
 
@@ -68,7 +71,8 @@ public class FionasPractice extends OpMode
 
 
 
-        telemetry.addData("Servo position is:", myServ.getPosition());
+        telemetry.addData("Servo position is:", myServePos);
+        telemetry.addLine(String.format("Servo position is: %.4f, eee=%.6f", myServePos, myServePos));
 
 
     }
