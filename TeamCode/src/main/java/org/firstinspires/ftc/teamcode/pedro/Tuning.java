@@ -27,14 +27,20 @@ public class Tuning {
     @Tuner
     public static Procedure foresightTuner()
     {
-        return new ForesightTuner((hardwareMap) -> new PinpointLocalizer(hardwareMap, Constants.localizerConfig),
-                (hardwareMap) -> new Mecanum(hardwareMap, Constants.drivetrainConfig));
+      //  return new ForesightTuner((hardwareMap) -> new PinpointLocalizer(hardwareMap, Constants.localizerConfig),
+               // (hardwareMap) -> new Mecanum(hardwareMap, Constants.drivetrainConfig));
+        return null;
     }
     @Tuner
     public static Procedure tests()
     {
         return new Tests(hardwareMap -> new Mecanum(hardwareMap,
-                Constants.drivetrainConfig), (hardwareMap -> new PinpointLocalizer(hardwareMap,
-                Constants.localizerConfig)), () -> new Foresight(Constants. foresightConfig));
+                Constants.drivetrainConfig),null
+                , null);
     }
+    @Tuner
+    public static Procedure mecanumTuner() {
+        return new MecanumTuner();
+    }
+
 }

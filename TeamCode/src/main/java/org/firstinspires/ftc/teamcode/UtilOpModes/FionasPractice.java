@@ -73,7 +73,7 @@ public class FionasPractice extends OpMode
 
         telemetry.addData("Servo position is:", myServePos);
         telemetry.addLine(String.format("Servo position is: %.4f, eee=%.6f", myServePos, myServePos));
-
+        telemetry.addLine("hsuifhdiuhf");
 
     }
 
