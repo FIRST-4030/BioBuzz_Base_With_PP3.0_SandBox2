@@ -22,18 +22,18 @@ public class FionasThing extends OpMode
     /*p.of(x, y, heading);
 So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 degrees. */
     private final Pose start = poseFactory.of(9, 26, 90);
-    private final Pose path1Start = poseFactory.of(9, 26, 90);
-    private final Pose path1 = poseFactory.of(9, 31, 90);
+
+    private final Pose point1 = poseFactory.of(9, 31, 90);
     private final Pose point2 = poseFactory.of(9, 9, 90);
     private final Pose point3 = poseFactory.of(9, 5, 90);
 
 
     public Path path1() {
-        return line(path1Start, path1).linear(path1Start, path1);
+        return line(start, point1).linear(start, point1);
     }
 
     public Path path2() {
-        return line(path1, point2).linear(path1, point2);
+        return line(point1, point2).linear(point1, point2);
     }
 
     public Path path3() {
@@ -42,8 +42,8 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
     private Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
-                follow(follower, path2()),
-                follow(follower, path3())
+               follow(follower, path2())
+               //follow(follower, path3())
 
         );
     }
@@ -52,6 +52,7 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
     public void init()
     {
         Scheduler.reset();
+       //follower = controlHub.getRobotSpecificPedroConstants();
         follower = Constants.create(hardwareMap);
         follower.setPose(start);
         follower.update();
