@@ -21,11 +21,11 @@ public class FionasThing extends OpMode
     // our poses
     /*p.of(x, y, heading);
 So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 degrees. */
-    private final Pose start = poseFactory.of(9, 26, 90);
+    private final Pose start = poseFactory.of(100, 9, 90);
 
-    private final Pose point1 = poseFactory.of(9, 51, 90);
-    private final Pose point2 = poseFactory.of(9, 9, 90);
-    private final Pose point3 = poseFactory.of(9, 5, 90);
+    private final Pose point1 = poseFactory.of(100, 34, 90);
+    private final Pose point2 = poseFactory.of(150, 16, 90);
+    private final Pose point3 = poseFactory.of(150, 26, 90);
 
 
     public Path path1() {
@@ -42,7 +42,8 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
     private Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
-                follow(follower, path2())
+                follow(follower, path2()),
+                follow(follower, path3())
                //follow(follower, path3())
 
         );
