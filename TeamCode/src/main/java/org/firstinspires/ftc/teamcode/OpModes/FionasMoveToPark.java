@@ -14,7 +14,7 @@ import com.pedropathing.ivy.Command;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 @Autonomous
-public class FionasThing extends OpMode
+public class FionasMoveToPark extends OpMode
 {
     private Follower follower; // Add this
     private final PoseFactory poseFactory = PoseFactory.degrees(); // add this
