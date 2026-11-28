@@ -37,35 +37,31 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
     private final Pose point2 = poseFactory.of(150, 16, 90);
     private final Pose point3 = poseFactory.of(150, 26, 90);
 
-
     public Path path1() {
         return line(start, point1).linear(start, point1);
     }
-
     public Path path2() {
         return line(point1, point2).linear(point1, point2);
     }
-
     public Path path3() {
         return line(point2, point3).linear(point2, point3);
     }
-
 
     public Command startShoot()
     {
         return sequential( instant(() -> {shooter.setPower(shootSpeed);}));
     }
+
     public Command stopShoot()
     {
        return sequential( instant(() -> {shooter.setPower(0);}));
-
     }
+
     public Command shoot()
     {
         return deadline(waitMs(3000), startShoot());
-
-
     }
+
     private Command autoRoutine() {
         return sequential(
                 follow(follower, path1()),
@@ -74,7 +70,6 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
                 follow(follower, path2())
                // follow(follower, path3())
                //follow(follower, path3())
-
         );
     }
 
@@ -88,17 +83,18 @@ So startPose is at (24, 24) facing 0 degrees, and park is at (48, 48) facing 90 
         follower.setPose(start);
         follower.update();
     }
+
     @Override
     public void start()
     {
         schedule(autoRoutine());
         // using the same park path from the last page
     }
+
     @Override
     public void loop()
     {
         follower.update();
         Scheduler.execute();
-
     }
 }
